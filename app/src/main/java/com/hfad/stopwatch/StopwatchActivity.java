@@ -23,4 +23,9 @@ public class StopwatchActivity extends Activity {
     public void onClickStop(View view) {         // get's called when stop button is clicked
         running = false;                         // stop the stopwatch
     }
+
+    public void onClickReset(View view) {         // get's called when stop button is clicked
+        running = false;                          // stop the stopwatch
+        seconds = 0;                              // reset to 0 the number of seconds
+    }
 }
