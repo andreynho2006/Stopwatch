@@ -10,7 +10,8 @@ import java.util.Locale;
 public class StopwatchActivity extends Activity {
 
     private int seconds = 0;
-    private boolean running = false;
+    private boolean running;
+    private boolean wasRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class StopwatchActivity extends Activity {
         if(savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             running = savedInstanceState.getBoolean("running");
+            wasRunning =savedInstanceState.getBoolean("wasRunning");
         }
 
         runTimer();
@@ -28,6 +30,7 @@ public class StopwatchActivity extends Activity {
     public void onSaveInstanceState(Bundle saveInstanceState) {
         saveInstanceState.putInt("seconds", seconds);
         saveInstanceState.putBoolean("running", running);
+        saveInstanceState.putBoolean("wasRunning", wasRunning);
     }
 
     public void onClickStart(View view) {         // get's called when start button is clicked
@@ -61,5 +64,20 @@ public class StopwatchActivity extends Activity {
                 handler.postDelayed(this, 1000);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        wasRunning = running;
+        running = false;
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        if(wasRunning) {
+            running = true;
+        }
     }
 }
