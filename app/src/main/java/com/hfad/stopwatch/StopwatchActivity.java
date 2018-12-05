@@ -19,4 +19,8 @@ public class StopwatchActivity extends Activity {
     public void onClickStart(View view) {         // get's called when start button is clicked
         running = true;                           // start the stopwatch
     }
+
+    public void onClickStop(View view) {         // get's called when stop button is clicked
+        running = false;                         // stop the stopwatch
+    }
 }
